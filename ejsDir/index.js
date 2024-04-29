@@ -16,10 +16,15 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/ig/:username', (req, res)=>{
-    const followers = ['iron man','captain ameria','flash','captain marvel','natasha rommenwolf', 'hulk','venom', 'peter parker', 'superman', 'black adam', 'doctor strange'];
 
     let {username} = req.params;
-    res.render("instagram.ejs", {username, followers});
+    const instaData = require("./data.json");
+    const data = instaData[username];
+    if(data){
+        res.render("instagram.ejs", {data});
+    }else{
+        res.render("error.ejs");
+    }  
 })
 
 app.get('/rolldice', (req, res)=>{
