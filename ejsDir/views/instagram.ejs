@@ -9,5 +9,13 @@
     <h1>username: <%= username %></h1>
     <button>Following</button>
     <button>Followers</button>
+
+    <h1>followers name:</h1>
+    <ul>
+        <% for(let name of followers){ %>
+            <h3><li><b><%= name %></b></li></h3>
+        <% } %>
+    </ul>
 </body>
 </html>
+
