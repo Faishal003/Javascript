@@ -1,9 +1,14 @@
-.container{
+.container {
     background-color: lightcoral;
+    padding: 20px; /* Add padding to the container */
+    margin-bottom: 20px; /* Add margin to create space between containers */
+    border: 1px solid #ccc; /* Optional: Add border for visual separation */
 }
-.user{
-    font-style: italic;
+
+.user {
+    margin-bottom: 10px; /* Add margin below username */
 }
-.content{
-    font-size: large;
+
+.content {
+    margin-bottom: 10px; /* Add margin below content */
 }

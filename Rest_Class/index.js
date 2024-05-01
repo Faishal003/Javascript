@@ -11,14 +11,17 @@ app.set("views", path.join(__dirname, "views"));
 
 let posts = [
     {
+        id: '1',
         username: "faishal ahmed emon",
         content: "This is all about programming.",
     },
     {
+        id: '2',
         username: "Captain america",
         content: "I can do this all day long.",
     },
     {
+        id: '3',
         username: "bubin",
         content: "Arise a bug in that banking project.",
     }
@@ -34,6 +37,12 @@ app.post('/posts', (req, res)=>{
     let {username, content} = req.body;
     posts.push({username, content});
     res.redirect('/posts');
+})
+app.get('/posts/:id', (req, res)=>{
+    let {id} = req.params;
+    let post = posts.find((p)=> id === p.id)
+    console.log(post);
+    res.render("show.ejs", {post});
 })
 
 app.listen(port, ()=>{
