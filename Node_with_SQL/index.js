@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const methodOverride = require('method-override')
+const { v4: uuidv4 } = require("uuid");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, '/views'));
@@ -99,7 +100,28 @@ app.patch("/users/:id", (req, res)=>{
         console.log(err);
         res.send("Error Occured..");
       }
-})
+});
+
+//add new user
+app.get("/users/new", (req, res)=>{
+  res.render("new.ejs");
+});
+
+app.post("/users/new", (req, res)=>{
+  let{ username, email, password } = req.body;
+  let id = uuidv4();
+  let q = `INSERT INTO user (id, username, email, password) VALUES ('${id}', '${username}', '${email}', '${password}')`;
+
+  try {
+    connection.query(q, (err, result)=>{
+      if(err) throw err;
+      res.redirect("/users");
+    })
+  } catch (error) {
+      console.log(err);
+      res.send("Error Occured..");
+  }
+});
 
 app.listen("8080", ()=>{
     console.log(`Listening to the port: 8080`);
