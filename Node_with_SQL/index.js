@@ -5,6 +5,7 @@ const app = express();
 const path = require("path");
 const methodOverride = require('method-override')
 const { v4: uuidv4 } = require("uuid");
+const { Console } = require('console');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, '/views'));
@@ -117,11 +118,58 @@ app.post("/users/new", (req, res)=>{
       if(err) throw err;
       res.redirect("/users");
     })
-  } catch (error) {
+  } catch (err) {
       console.log(err);
       res.send("Error Occured..");
   }
 });
+
+//delete user
+app.get("/users/:id/delete", (req, res)=>{
+  let {id} = req.params;
+  let q = `SELECT * FROM user WHERE id='${id}'`;
+
+  try {
+    connection.query(q, (err, result)=>{
+      if(err) throw err;
+      let user = result[0];
+      res.render("delete.ejs", {user});
+    })
+  } catch (err) {
+    console.log(err);
+    res.send("Error Occured..");
+  }
+});
+
+app.delete("/users/:id", (req, res)=>{
+  let {id} = req.params;
+  let {password} = req.body;
+  let q = `SELECT * FROM user WHERE id='${id}'`;
+
+  try {
+    connection.query(q, (err, result)=>{
+      if(err) throw err;
+      let user = result[0];
+      console.log(user.password);
+
+      if(user.password != password){
+        res.send("Wrong password");
+      }else{
+        let q2 = `DELETE FROM user WHERE id='${id}'`;
+        connection.query(q2, (err, result)=>{
+          if(err) throw err;
+          else{
+            console.log("user deleted");
+            res.redirect("/users");
+          }
+        })
+      }
+    })
+  } catch (err) {
+    console.log(err);
+    res.send("Error Occured..");
+  }
+})
 
 app.listen("8080", ()=>{
     console.log(`Listening to the port: 8080`);

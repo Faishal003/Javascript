@@ -18,6 +18,7 @@
                 <th>User</th>
                 <th>Email</th>
                 <th>Edit User</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,11 @@
                     <td>
                         <form method="get" action="/users/<%= user.id %>/edit">
                             <button>edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/users/<%= user.id %>/delete" method="get">
+                            <button>delete</button>
                         </form>
                     </td>
                 </tr>
