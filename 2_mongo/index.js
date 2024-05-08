@@ -16,14 +16,10 @@ const userSchema = new mongoose.Schema({
     age: String
 })
 
-// const User = mongoose.model("User", userSchema);
-
-// User.find({age: {$gt: 30}})
-// .then((res)=>console.log(res))
-// .catch((err)=>console.log(err))
-
 const User = mongoose.model("User", userSchema);
 
-User.findById("663be5f8b9bbf3d52c7ea616")
-.then((res)=>console.log(res))
-.catch((err)=>console.log(err))
+// User.updateOne({name: "hulk",age: 100}).then((res)=>console.log(res)).catch((err)=>console.log(err))
+
+User.updateMany({name: "hulk"},{age: 10}).then((res)=>console.log(res)).catch((err)=>console.log(err))
+
+
