@@ -21,14 +21,24 @@ const bookSchema = new mongoose.Schema({
     price: {
         type: Number,
     },
+    discount:{
+        type: Number,
+        default: 0,
+    },
+    category: {
+        type: String,
+        enum: ["fiction", "non-fiction"]
+    },
+    genre: [String],
 });
 
 const Book = mongoose.model("Book", bookSchema);
 
-let book1 = new Book({
-    title: "avengers infinity war",
-    author: "Nolan",
-    price: "3000",
+let book6 = new Book({
+    title: "Dc comics V2",
+    author: "Zack Snyder",
+    price: "5000",
+    genre: ["comics", "superhero", "fictional"]
 });
 
-book1.save().then((res)=>console.log(res)).catch((err)=>console.log(err))
+book6.save().then((res)=>console.log(res)).catch((err)=>console.log(err))
