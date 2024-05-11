@@ -18,8 +18,10 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-// User.updateOne({name: "hulk",age: 100}).then((res)=>console.log(res)).catch((err)=>console.log(err))
+//delete and deletemany
+// User.deleteOne({name: "hulk"}).then((res)=>console.log(res)).catch((err)=>console.log(err))
+// User.deleteMany({age: 100}).then((res)=>console.log(res))
 
-User.updateMany({name: "hulk"},{age: 10}).then((res)=>console.log(res)).catch((err)=>console.log(err))
+// User.findByIdAndDelete("663be5f8b9bbf3d52c7ea616").then((res)=>console.log(res))
 
-
+User.findOneAndDelete({name: "captain marvel"}).then((res)=>console.log(res))
