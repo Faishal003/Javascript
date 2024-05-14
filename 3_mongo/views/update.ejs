@@ -9,7 +9,7 @@
     <p>user id: <b><%= user._id %></b></p>
     <p>message was sent from <i><b><%= user.from %></b></i> to <i><b><%= user.to %></b></i></p>
 
-    <form method="POST" action="/chats/<%= user._id %>">
+    <form method="POST" action="/chats/<%= user._id %>?_method=PUT">
         <textarea name="msg" rows="6" cols="50"><%= user.msg %></textarea><br><br>
         <button>edit</button>
     </form>
