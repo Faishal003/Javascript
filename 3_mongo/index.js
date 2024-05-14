@@ -19,8 +19,13 @@ async function main() {
 app.get('/chats', async (req, res)=>{
   let chats = await Chat.find();
   console.log(chats);
-  res.render("index.ejs", {chats})
+  res.render("index.ejs", {chats});
 })
+
+//new chat
+app.get('/chats/new', (req, res)=>{
+  res.render("new.ejs");
+});
 
 app.get('/', (req, res)=>{
     res.send("welcome to homepage.")
