@@ -40,6 +40,13 @@ app.post('/chats', (req, res)=>{
   res.redirect("/chats");
 });
 
+//update
+app.get('/chats/:id/edit', async(req, res)=>{
+  let {id} = req.params;
+  let user = await Chat.findById(id);
+  res.render("update.ejs", {user});
+});
+
 app.get('/', (req, res)=>{
     res.send("welcome to homepage.")
 });
