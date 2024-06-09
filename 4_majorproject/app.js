@@ -28,12 +28,25 @@ app.get('/listing', async (req, res)=>{
   res.render("listing/index.ejs", {allListing});
 });
 
+//new route
+app.get('/listing/new',(req, res)=>{
+  res.render("listing/new.ejs");
+})
+
+app.post('/listing', async(req, res)=>{
+  const listing = new Listing(req.body.listing);
+  listing.save();
+  res.redirect('/listing');
+})
+
 //
 app.get('/listing/:id', async (req, res)=>{
   let {id} = req.params;
   const listing = await Listing.findById(id);
   res.render("listing/show.ejs", {listing});
 });
+
+
 
 app.listen(8080, (req, res)=>{
     console.log("server is listening on port 8080: ")
