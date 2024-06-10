@@ -4,13 +4,17 @@ const mongoose = require("mongoose");
 const path = require("path");
 const Listing = require('./models/listing.js');
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate")
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({extended: true}));
-app.use(methodOverride("_method"))
+app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+app.engine("ejs", ejsMate);
 
 main()
 .then(()=> console.log("connection successfull to the database"))
