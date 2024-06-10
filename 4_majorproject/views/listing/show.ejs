@@ -14,7 +14,9 @@
         <li>Price: &#2547; <%= listing.price.toLocaleString("en-BD") %></li>
         <li>Location: <%= listing.location %></li>
         <li>Country: <%= listing.country %></li>
-</ul>
+        <br>
+        <a href="/listing/<%= listing._id %>/edit">Edit this listing</a>
+    </ul>
 </body>
 </html>
 

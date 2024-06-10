@@ -3,9 +3,11 @@ const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
 const Listing = require('./models/listing.js');
+const methodOverride = require("method-override");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride("_method"))
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -46,6 +48,18 @@ app.get('/listing/:id', async (req, res)=>{
   res.render("listing/show.ejs", {listing});
 });
 
+//update route
+app.get('/listing/:id/edit', async(req, res)=>{
+  let {id} = req.params;
+  const listing = await Listing.findById(id);
+  res.render('listing/edit.ejs', {listing});
+})
+//
+app.put('/listing/:id', async(req, res)=>{
+  let {id} = req.params;
+  await Listing.findByIdAndUpdate(id, {...req.body.listing});
+  res.redirect(`/listing/${id}`);
+})
 
 
 app.listen(8080, (req, res)=>{
