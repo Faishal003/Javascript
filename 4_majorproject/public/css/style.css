@@ -83,3 +83,12 @@ body{
     opacity: 0.2;
     background-color: white;
 }
+
+/* show listing */
+.show-img{
+    height: 30vh;
+}
+
+.btns{
+    display: flex;
+}
